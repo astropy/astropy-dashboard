@@ -5,9 +5,9 @@
   <body>
     <div id="wrapper">
     <h1>Astropy Project Dashboard</h1>
-    <table align='center'>
+    <table id="packages" align='center'>
       {% for package in packages %}
-      <tr>
+      <tr class="{{ loop.cycle('even', 'odd') }}">
         <td>
           {{ package.display_name }}
         </td>

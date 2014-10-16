@@ -44,6 +44,7 @@ try:
         f.write(template.render(packages=packages))
 
     subprocess.call('git add status.html', shell=True)
+    subprocess.call('git add style.css', shell=True)
     subprocess.call('git commit -m "Latest build"', shell=True)
 finally:
     subprocess.call('git checkout master', shell=True)
