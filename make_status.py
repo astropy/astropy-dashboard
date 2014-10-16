@@ -39,9 +39,11 @@ template = Template(open('template.html', 'r').read())
 
 subprocess.call('git checkout gh-pages', shell=True)
 
-with open('status.html', 'w') as f:
-    f.write(template.render(packages=packages))
+try:
+    with open('status.html', 'w') as f:
+        f.write(template.render(packages=packages))
 
-subprocess.call('git add status.html', shell=True)
-subprocess.call('git commit -m "Latest build"', shell=True)
-subprocess.call('git checkout master', shell=True)
+    subprocess.call('git add status.html', shell=True)
+    subprocess.call('git commit -m "Latest build"', shell=True)
+finally:
+    subprocess.call('git checkout master', shell=True)
