@@ -1,3 +1,44 @@
-h1 {
-  text-align: center;
+a{
+	color: #FF5000;
+	text-decoration: none;
+}
+a, svg{
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+a:hover{
+	color:#333;
+}
+
+h1{
+	font-size: 36px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+/* This file is in the public domain because it was created by NASA
+and ESA.  The material was created for NASA by Space Telescope Science
+Institute under Contract NAS5-26555, or for ESA by the Hubble European
+Space Agency Information Centre. Copyright statement at
+hubblesite.org. */
+body {
+        background-image: url("../images/background.jpg");
+        background-repeat: repeat-x;
+        background-position: center top;
+}
+
+body {
+	line-height: 1.25em;
+	font-size: 14px;
+	color:#333;
+	font-family: 'Open Sans', sans-serif;
 }
