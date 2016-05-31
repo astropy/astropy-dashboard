@@ -42,3 +42,7 @@ body {
 	color:#333;
 	font-family: 'Open Sans', sans-serif;
 }
+
+.centered {
+	text-align: center;
+}
