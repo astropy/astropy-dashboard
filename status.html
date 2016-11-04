@@ -58,8 +58,11 @@
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open( "GET", url, false ); // false for synchronous request
       xmlHttp.send( null );
-      var registry_pkgs = JSON.parse(xmlHttp.responseText).packages;
-
+      var registry_pkgs = JSON.parse(xmlHttp.responseText).packages.sort(
+        function( a, b ) {a = a.name.toLowerCase();
+                          b = b.name.toLowerCase();
+                          return a < b ? -1 : a > b ? 1 : 0;
+                         });
       for (var i = 0; i < registry_pkgs.length; i++) {
         var groups = registry_pkgs[i].repo_url.match(repo_re);
         if (groups.length>2) {
@@ -79,8 +82,8 @@
     var context = { packages: [{user: "astropy", repo: "astropy",
                                 pypi_name: "astropy",
                                 repo_url: "https://github.com/astropy/astropy"}] };
-    //populate_affiliated(context, "http://www.astropy.org/affiliated/registry.json");
-    populate_affiliated(context, "../affiliated/registry.json");
+    populate_affiliated(context, "http://www.astropy.org/affiliated/registry.json");
+//    populate_affiliated(context, "../affiliated/registry.json");
 
 
     Handlebars.registerHelper('display_name', function(person) {
