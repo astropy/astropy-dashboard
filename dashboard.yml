@@ -42,7 +42,7 @@
     badges: travis, codecov
 
   - repo: astropy/astropy-changelog
-    badges: travis, codecov, pypi, conda
+    badges: travis, codecov, pypi
 
   - repo: astropy/astropy-helpers
     badges: travis, appveyor, codecov, pypi, conda
