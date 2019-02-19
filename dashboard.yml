@@ -98,6 +98,9 @@
     appveyor_project: astrofrog/APLpy
     circleci_project: aplpy/aplpy
     travis_project: aplpy/aplpy
+    
+  - repo: astroML/astroML
+    badges: travis, pypi, conda
 
   - repo: adrn/gala
     badges: travis, appveyor, coveralls, rtd, pypi, conda
