@@ -98,12 +98,13 @@
     appveyor_project: astrofrog/APLpy
     circleci_project: aplpy/aplpy
     travis_project: aplpy/aplpy
-    
+
   - repo: astroML/astroML
     badges: travis, pypi, conda
 
   - repo: adrn/gala
     badges: travis, appveyor, coveralls, rtd, pypi, conda
+    conda_project: astropy/astro-gala
 
   - repo: jobovy/galpy
     badges: travis, appveyor, codecov, rtd, pypi, conda
@@ -127,7 +128,14 @@
     badges: travis, circleci, codecov, rtd, pypi, conda
 
   - repo: spacetelescope/synphot_refactor
-    badges: travis, appveyor, coveralls, rtd, pypi
+    badges: travis, appveyor, coveralls, rtd, pypi, conda
     pypi_name: synphot
     rtd_name: synphot
     appveyor_project: pllim/synphot-refactor
+    conda_project: astropy/synphot
+
+  - repo: toros-astro/corral
+    conda_project: astropy/corral-pipeline
+
+  - repo: spacetelescope/spherical_geometry
+    conda_project: astropy/spherical-geometry
