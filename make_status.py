@@ -5,10 +5,21 @@ from jinja2 import Template
 from yaml import load
 import requests
 
+
+def normalize_repo_name(repo):
+    # Put the normalization in one place to avoid future copy-paste errors
+    return repo.lower()
+
+
 with open('dashboard.yml') as f:
     config = load(f)
 
-existing = {package['repo'].split('/')[1].lower(): package for section in config for package in section['packages']}
+# Use the repo name (owner/repo) as the key instead of just repo. The
+# combination of owner/repo should be the same in both the affiliated
+# package registry and dashboard.yml.
+existing = {normalize_repo_name(package['repo']): package
+            for section in config
+            for package in section['packages']}
 
 # Also get affiliated packages
 registry = requests.get('http://www.astropy.org/affiliated/registry.json').json()['packages']
@@ -21,23 +32,41 @@ else:
     sys.exit(1)
 
 for package in registry:
-    # FIXME: Not all repo name is actual package name.
-    pkg_name = package['name'].lower()
-    
-    if pkg_name in existing:
-        entry = existing[pkg_name]
+    # There was an issue in that the package name in the affiliated
+    # package registry is a separate field (name) but the name in dashboard.yml
+    # is the name of the github repo, and the two can differ. A prior version
+    # of this code tried to match the affiliated package registry name, i.e.
+    # package['name'] to repo part of owner/repo, which doesn't work if the
+    # repo name is different than the package name.
+
+    # Since all of the affiliated packages have a github repo, and since
+    # the owner/repo should match in dashboard.yml and the affiliated
+    # package recipe, use pkg_repo below. In the event that an entry in
+    # the affiliated package registry does not have a github repo, raise
+    # an exception.
+    if 'github.com' in package['repo_url']:
+        pkg_repo = package['repo_url'].split('github.com/')[1]
+        # Normalize pkg_repo to match what is done above in existing
+        pkg_repo = normalize_repo_name(pkg_repo)
+    else:
+        raise ValueError('The package named {} from the affiliated package '
+                         'registry does not have a GitHub '
+                         'repository.'.format(package['name']))
+
+    if pkg_repo in existing:
+        entry = existing[pkg_repo]
     else:
         entry = {}
+
     if 'repo' not in entry:
-        if 'github.com' in package['repo_url']:
-            entry['repo'] = package['repo_url'].split('github.com/')[1]
-        else:
-            print("Skipping package {0} which is not on GitHub".format(package['name']))
+        if pkg_repo:
+            entry['repo'] = pkg_repo
+
     if 'pypi_name' not in entry:
         entry['pypi_name'] = package['pypi_name']
     if 'badges' not in entry:
         entry['badges'] = 'travis, coveralls, rtd, pypi, conda'
-    if pkg_name not in existing:
+    if pkg_repo not in existing:
         affiliated['packages'].append(entry)
 
 for section in config:
