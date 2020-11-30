@@ -3,8 +3,6 @@ name: Deploy
 on:
   pull_request:
   push:
-    branches:
-      - master
 
 # TODO: Make sure this actually works.
 jobs:
