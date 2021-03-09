@@ -26,7 +26,7 @@
           {% if 'travis' in package.badges %}
           <td align='left'>
             <a href="https://travis-ci.org/{{ package.travis_project }}">
-              <img src="https://travis-ci.org/{{ package.travis_project }}.svg?branch=master">
+              <img src="https://travis-ci.org/{{ package.travis_project }}.svg?branch=main">
             </a>
           </td>
           {% else %}
@@ -43,8 +43,8 @@
           {% endif %}
           {% if 'appveyor' in package.badges %}
           <td align='left'>
-            <a href="https://ci.appveyor.com/project/{{ package.appveyor_project }}?branch=master">
-              <img src="https://img.shields.io/appveyor/ci/{{ package.appveyor_project }}/master.svg">
+            <a href="https://ci.appveyor.com/project/{{ package.appveyor_project }}?branch=main">
+              <img src="https://img.shields.io/appveyor/ci/{{ package.appveyor_project }}/main.svg">
             </a>
           </td>
           {% else %}
@@ -52,14 +52,14 @@
           {% endif %}
           {% if 'coveralls' in package.badges %}
           <td align='left'>
-            <a href="https://coveralls.io/r/{{ package.repo }}?branch=master">
-              <img src="https://coveralls.io/repos/{{ package.repo }}/badge.svg?branch=master">
+            <a href="https://coveralls.io/r/{{ package.repo }}?branch=main">
+              <img src="https://coveralls.io/repos/{{ package.repo }}/badge.svg?branch=main">
             </a>
           </td>
           {% elif 'codecov' in package.badges %}
           <td align='left'>
-            <a href="https://codecov.io/gh/{{ package.repo }}?branch=master">
-              <img src="https://codecov.io/gh/{{ package.repo }}/branch/master/graph/badge.svg">
+            <a href="https://codecov.io/gh/{{ package.repo }}?branch=main">
+              <img src="https://codecov.io/gh/{{ package.repo }}/branch/main/graph/badge.svg">
             </a>
           </td>
           {% else %}
